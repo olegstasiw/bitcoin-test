@@ -26,6 +26,10 @@
 		21E04A422E0F0CF7006475BC /* WalletProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A412E0F0CF7006475BC /* WalletProtocols.swift */; };
 		21E04A462E0F0D6D006475BC /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A452E0F0D6D006475BC /* PrimaryButton.swift */; };
 		21E04A492E0F0D8E006475BC /* WalletBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A482E0F0D8E006475BC /* WalletBalanceView.swift */; };
+		21E04A4C2E0F183D006475BC /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A4B2E0F183D006475BC /* TransactionCell.swift */; };
+		21E04A4E2E0F1855006475BC /* TransactionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A4D2E0F1855006475BC /* TransactionHeaderView.swift */; };
+		21E04A502E0F18B2006475BC /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A4F2E0F18B2006475BC /* TransactionService.swift */; };
+		21E04A522E0F19B7006475BC /* FileToWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A512E0F19B7006475BC /* FileToWork.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +73,10 @@
 		21E04A412E0F0CF7006475BC /* WalletProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletProtocols.swift; sourceTree = "<group>"; };
 		21E04A452E0F0D6D006475BC /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		21E04A482E0F0D8E006475BC /* WalletBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBalanceView.swift; sourceTree = "<group>"; };
+		21E04A4B2E0F183D006475BC /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
+		21E04A4D2E0F1855006475BC /* TransactionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHeaderView.swift; sourceTree = "<group>"; };
+		21E04A4F2E0F18B2006475BC /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
+		21E04A512E0F19B7006475BC /* FileToWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileToWork.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +119,7 @@
 				0DF1D1412D22DCC3001626E7 /* Helpers */,
 				0DF1D13F2D22DC4B001626E7 /* ServicesAssembler.swift */,
 				0DF1D1442D22DCFF001626E7 /* BitcoinRateService.swift */,
+				21E04A4F2E0F18B2006475BC /* TransactionService.swift */,
 				0D15405F2D22EF3400D6D63F /* AnalyticsService */,
 			);
 			path = Services;
@@ -187,6 +196,7 @@
 			children = (
 				21E04A382E0F0CA2006475BC /* Wallet */,
 				21E04A472E0F0D71006475BC /* Common */,
+				21E04A512E0F19B7006475BC /* FileToWork.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -217,6 +227,8 @@
 			isa = PBXGroup;
 			children = (
 				21E04A482E0F0D8E006475BC /* WalletBalanceView.swift */,
+				21E04A4B2E0F183D006475BC /* TransactionCell.swift */,
+				21E04A4D2E0F1855006475BC /* TransactionHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -353,10 +365,14 @@
 			files = (
 				0D1540612D22EF5D00D6D63F /* AnalyticsEvent.swift in Sources */,
 				21E04A402E0F0CE5006475BC /* WalleteAssembly.swift in Sources */,
+				21E04A4C2E0F183D006475BC /* TransactionCell.swift in Sources */,
 				21E04A422E0F0CF7006475BC /* WalletProtocols.swift in Sources */,
+				21E04A4E2E0F1855006475BC /* TransactionHeaderView.swift in Sources */,
 				0DF1D1432D22DCD8001626E7 /* PerformOnce.swift in Sources */,
 				21E04A3C2E0F0CC5006475BC /* WalletInteractor.swift in Sources */,
+				21E04A502E0F18B2006475BC /* TransactionService.swift in Sources */,
 				0DF1D1452D22DD06001626E7 /* BitcoinRateService.swift in Sources */,
+				21E04A522E0F19B7006475BC /* FileToWork.swift in Sources */,
 				21E04A3A2E0F0CB6006475BC /* WalletPresenter.swift in Sources */,
 				0DF1D1472D22DD4A001626E7 /* AnalyticsService.swift in Sources */,
 				1CA3B6562D22B0F500176711 /* AppDelegate.swift in Sources */,

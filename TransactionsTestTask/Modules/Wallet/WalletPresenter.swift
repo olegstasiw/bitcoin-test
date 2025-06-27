@@ -17,6 +17,8 @@ class WalletPresenter: NSObject, WalletViewToPresenter {
   }
   
   var interactor: WalletPresenterToInteractor?
+  
+  var items: [TransactionGroup] = TransactionService.shared.generateFakeTransactions()
 }
 
 extension WalletPresenter: WalletInteractorToPresenter {

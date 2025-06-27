@@ -7,7 +7,9 @@
 
 import Foundation
 
-protocol WalletViewToPresenter {}
+protocol WalletViewToPresenter {
+  var items: [TransactionGroup] { get set }
+}
 
 protocol WalletPresenterToRouter: AnyObject {
   var presenter: WalletRouterToPresenter? { get set }
