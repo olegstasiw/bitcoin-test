@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 class WalletPresenter: NSObject, WalletViewToPresenter {
   weak var viewController: WalletPresenterToView?
@@ -18,10 +19,18 @@ class WalletPresenter: NSObject, WalletViewToPresenter {
   
   var interactor: WalletPresenterToInteractor?
   
-  var items: [TransactionGroup] = TransactionService.shared.generateFakeTransactions()
+  var items: [TransactionGroup] = []
+  
+  func viewDidLoad() {
+    interactor?.setupObservers()
+  }
 }
 
 extension WalletPresenter: WalletInteractorToPresenter {
+  func updateTransactions(transactions: [TransactionGroup]) {
+    items = transactions
+    viewController?.updateTransactions()
+  }
 }
 
 extension WalletPresenter: WalletRouterToPresenter { }

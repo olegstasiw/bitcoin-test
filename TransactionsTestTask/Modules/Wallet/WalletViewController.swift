@@ -26,31 +26,29 @@ class WalletViewController: UIViewController {
     tableView.register(TransactionCell.self, forCellReuseIdentifier: TransactionCell.identifier)
     return tableView
   }()
- 
+  
   var presenter: WalletViewToPresenter?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    setupViews()
+    setupUI()
     setupConstraints()
+    presenter?.viewDidLoad()
   }
   
-  private func setupViews() {
+  private func setupUI() {
+    view.backgroundColor = .mainBackground
     view.addSubview(balanceView)
     view.addSubview(transactionsTableView)
-    
-    view.backgroundColor = .mainBackground
-    balanceView.layer.cornerRadius = 8
   }
   
   private func setupConstraints() {
     NSLayoutConstraint.activate([
-      balanceView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      balanceView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-      balanceView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+      balanceView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+      balanceView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+      balanceView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
       
-      transactionsTableView.topAnchor.constraint(equalTo: balanceView.bottomAnchor, constant: 16),
+      transactionsTableView.topAnchor.constraint(equalTo: balanceView.bottomAnchor, constant: 20),
       transactionsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       transactionsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       transactionsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -58,40 +56,22 @@ class WalletViewController: UIViewController {
   }
 }
 
-extension WalletViewController: WalletPresenterToView {}
-
-extension WalletViewController: WalletBalanceViewDelegate {
-  func didTapAddTransaction() {
-    print("Add Transaction button tapped")
-  }
-  
-  func didTapTopUp() {
-    print("Top Up button tapped")
-  }
-}
-
 extension WalletViewController: UITableViewDataSource {
-  
   func numberOfSections(in tableView: UITableView) -> Int {
-    guard let items = presenter?.items else {
-      return 0
-    }
-    return items.count
+    return presenter?.items.count ?? 0
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    guard let items = presenter?.items else {
-      return 0
-    }
-    return items[section].transactions.count
+    return presenter?.items[section].transactions.count ?? 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let presenter,
-          let cell = tableView.dequeueReusableCell(withIdentifier: TransactionCell.identifier, for: indexPath) as? TransactionCell else {
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: TransactionCell.identifier, for: indexPath) as? TransactionCell,
+          let items = presenter?.items else {
       return UITableViewCell()
     }
-    let transaction = presenter.items[indexPath.section].transactions[indexPath.row]
+    
+    let transaction = items[indexPath.section].transactions[indexPath.row]
     cell.configure(with: transaction)
     return cell
   }
@@ -118,5 +98,22 @@ extension WalletViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 60
+  }
+}
+
+extension WalletViewController: WalletBalanceViewDelegate {
+  func didTapAddTransaction() {}
+  
+  func didTapTopUp() {}
+}
+
+extension WalletViewController: WalletPresenterToView {
+  func updateTransactions() {
+    DispatchQueue.main.async { [weak self] in
+      guard let self = self else { return }
+        UIView.animate(withDuration: 0.3) {
+          self.transactionsTableView.reloadData()
+        }
+    }
   }
 }

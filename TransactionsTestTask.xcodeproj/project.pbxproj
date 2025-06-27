@@ -29,7 +29,11 @@
 		21E04A4C2E0F183D006475BC /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A4B2E0F183D006475BC /* TransactionCell.swift */; };
 		21E04A4E2E0F1855006475BC /* TransactionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A4D2E0F1855006475BC /* TransactionHeaderView.swift */; };
 		21E04A502E0F18B2006475BC /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A4F2E0F18B2006475BC /* TransactionService.swift */; };
-		21E04A522E0F19B7006475BC /* FileToWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A512E0F19B7006475BC /* FileToWork.swift */; };
+		21E04A582E0F1C99006475BC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A572E0F1C99006475BC /* CoreDataManager.swift */; };
+		21E04A5A2E0F205F006475BC /* TransactionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A592E0F205F006475BC /* TransactionGroup.swift */; };
+		21E04A5D2E0F2083006475BC /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A5C2E0F2083006475BC /* Transaction.swift */; };
+		21E04A5F2E0F2093006475BC /* TransactionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A5E2E0F2093006475BC /* TransactionCategory.swift */; };
+		21E04A612E0F20A5006475BC /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A602E0F20A5006475BC /* TransactionType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +80,11 @@
 		21E04A4B2E0F183D006475BC /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
 		21E04A4D2E0F1855006475BC /* TransactionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHeaderView.swift; sourceTree = "<group>"; };
 		21E04A4F2E0F18B2006475BC /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
-		21E04A512E0F19B7006475BC /* FileToWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileToWork.swift; sourceTree = "<group>"; };
+		21E04A572E0F1C99006475BC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		21E04A592E0F205F006475BC /* TransactionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionGroup.swift; sourceTree = "<group>"; };
+		21E04A5C2E0F2083006475BC /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		21E04A5E2E0F2093006475BC /* TransactionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCategory.swift; sourceTree = "<group>"; };
+		21E04A602E0F20A5006475BC /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +128,7 @@
 				0DF1D13F2D22DC4B001626E7 /* ServicesAssembler.swift */,
 				0DF1D1442D22DCFF001626E7 /* BitcoinRateService.swift */,
 				21E04A4F2E0F18B2006475BC /* TransactionService.swift */,
+				21E04A572E0F1C99006475BC /* CoreDataManager.swift */,
 				0D15405F2D22EF3400D6D63F /* AnalyticsService */,
 			);
 			path = Services;
@@ -161,6 +170,7 @@
 				21E04A342E0F0C0F006475BC /* Resources */,
 				1CA3B6662D22B0F600176711 /* Info.plist */,
 				1CA3B65E2D22B0F500176711 /* TransactionsTestTask.xcdatamodeld */,
+				21E04A5B2E0F2062006475BC /* Models */,
 			);
 			path = TransactionsTestTask;
 			sourceTree = "<group>";
@@ -196,7 +206,6 @@
 			children = (
 				21E04A382E0F0CA2006475BC /* Wallet */,
 				21E04A472E0F0D71006475BC /* Common */,
-				21E04A512E0F19B7006475BC /* FileToWork.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -231,6 +240,17 @@
 				21E04A4D2E0F1855006475BC /* TransactionHeaderView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		21E04A5B2E0F2062006475BC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				21E04A592E0F205F006475BC /* TransactionGroup.swift */,
+				21E04A5C2E0F2083006475BC /* Transaction.swift */,
+				21E04A5E2E0F2093006475BC /* TransactionCategory.swift */,
+				21E04A602E0F20A5006475BC /* TransactionType.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,15 +391,19 @@
 				0DF1D1432D22DCD8001626E7 /* PerformOnce.swift in Sources */,
 				21E04A3C2E0F0CC5006475BC /* WalletInteractor.swift in Sources */,
 				21E04A502E0F18B2006475BC /* TransactionService.swift in Sources */,
+				21E04A5F2E0F2093006475BC /* TransactionCategory.swift in Sources */,
 				0DF1D1452D22DD06001626E7 /* BitcoinRateService.swift in Sources */,
-				21E04A522E0F19B7006475BC /* FileToWork.swift in Sources */,
 				21E04A3A2E0F0CB6006475BC /* WalletPresenter.swift in Sources */,
 				0DF1D1472D22DD4A001626E7 /* AnalyticsService.swift in Sources */,
+				21E04A582E0F1C99006475BC /* CoreDataManager.swift in Sources */,
 				1CA3B6562D22B0F500176711 /* AppDelegate.swift in Sources */,
+				21E04A5D2E0F2083006475BC /* Transaction.swift in Sources */,
 				21E04A372E0F0C9D006475BC /* WalletViewController.swift in Sources */,
 				1CA3B6582D22B0F500176711 /* SceneDelegate.swift in Sources */,
+				21E04A5A2E0F205F006475BC /* TransactionGroup.swift in Sources */,
 				1CA3B6602D22B0F500176711 /* TransactionsTestTask.xcdatamodeld in Sources */,
 				21E04A492E0F0D8E006475BC /* WalletBalanceView.swift in Sources */,
+				21E04A612E0F20A5006475BC /* TransactionType.swift in Sources */,
 				21E04A462E0F0D6D006475BC /* PrimaryButton.swift in Sources */,
 				0DF1D1402D22DC51001626E7 /* ServicesAssembler.swift in Sources */,
 				21E04A3E2E0F0CD4006475BC /* WalletRouter.swift in Sources */,
