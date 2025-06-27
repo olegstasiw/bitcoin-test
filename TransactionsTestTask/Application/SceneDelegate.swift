@@ -15,7 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
               options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     window = UIWindow(windowScene: windowScene)
-    let viewController = ViewController()
+    let assembly = WalleteAssembly()
+    let viewController = assembly.makeModule()
     let navigationController = UINavigationController(rootViewController: viewController)
     window?.rootViewController = navigationController
     window?.makeKeyAndVisible()
