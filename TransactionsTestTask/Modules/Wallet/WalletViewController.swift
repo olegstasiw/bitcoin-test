@@ -24,6 +24,7 @@ class WalletViewController: UIViewController {
     tableView.dataSource = self
     tableView.delegate = self
     tableView.register(TransactionCell.self, forCellReuseIdentifier: TransactionCell.identifier)
+    tableView.sectionHeaderTopPadding = 8
     return tableView
   }()
   
@@ -45,12 +46,12 @@ class WalletViewController: UIViewController {
   private func setupConstraints() {
     NSLayoutConstraint.activate([
       balanceView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-      balanceView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-      balanceView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+      balanceView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+      balanceView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
       
-      transactionsTableView.topAnchor.constraint(equalTo: balanceView.bottomAnchor, constant: 20),
-      transactionsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      transactionsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      transactionsTableView.topAnchor.constraint(equalTo: balanceView.bottomAnchor, constant: 16),
+      transactionsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+      transactionsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
       transactionsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
     ])
   }
