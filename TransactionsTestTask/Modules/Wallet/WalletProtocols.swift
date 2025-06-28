@@ -11,11 +11,13 @@ protocol WalletViewToPresenter {
   var items: [TransactionGroup] { get set }
   func viewDidLoad()
   func routeToAddTransaction()
+  func routeToTopUpBalance()
 }
 
 protocol WalletPresenterToRouter: AnyObject {
   var presenter: WalletRouterToPresenter? { get set }
   func showAddTransaction()
+  func showTopUpBalance()
 }
 
 protocol WalletPresenterToInteractor {

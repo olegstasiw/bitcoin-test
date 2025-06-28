@@ -29,6 +29,10 @@ class WalletPresenter: NSObject, WalletViewToPresenter {
   func routeToAddTransaction() {
     router?.showAddTransaction()
   }
+  
+  func routeToTopUpBalance() {
+    router?.showTopUpBalance()
+  }
 }
 
 extension WalletPresenter: WalletInteractorToPresenter {
