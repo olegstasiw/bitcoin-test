@@ -9,9 +9,11 @@ import Foundation
 
 protocol WalletViewToPresenter {
   var items: [TransactionGroup] { get set }
+  var hasMoreData: Bool { get set }
   func viewDidLoad()
   func routeToAddTransaction()
   func routeToTopUpBalance()
+  func loadMoreData()
 }
 
 protocol WalletPresenterToRouter: AnyObject {
@@ -23,6 +25,7 @@ protocol WalletPresenterToRouter: AnyObject {
 protocol WalletPresenterToInteractor {
   func setupObservers()
   func addTransaction(transaction: Transaction)
+  func loadMoreData()
 }
 
 protocol WalletPresenterToView: AnyObject {
@@ -33,6 +36,7 @@ protocol WalletPresenterToView: AnyObject {
 protocol WalletInteractorToPresenter: AnyObject {
   func updateTransactions(transactions: [TransactionGroup])
   func updateCurrentBalance(_ balance: Double)
+  func updateHasMoreData(_ hasMore: Bool)
 }
 
 protocol WalletRouterToPresenter: AnyObject {

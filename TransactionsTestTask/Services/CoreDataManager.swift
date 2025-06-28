@@ -61,6 +61,31 @@ class CoreDataManager {
     }
   }
   
+  func fetchTransactionsWithPagination(offset: Int, limit: Int) -> [TransactionEntity] {
+    let request: NSFetchRequest<TransactionEntity> = TransactionEntity.fetchRequest()
+    request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+    request.fetchOffset = offset
+    request.fetchLimit = limit
+    
+    do {
+      return try context.fetch(request)
+    } catch {
+      print("Error fetching transactions with pagination: \(error)")
+      return []
+    }
+  }
+  
+  func getTotalTransactionCount() -> Int {
+    let request: NSFetchRequest<TransactionEntity> = TransactionEntity.fetchRequest()
+    
+    do {
+      return try context.count(for: request)
+    } catch {
+      print("Error getting transaction count: \(error)")
+      return 0
+    }
+  }
+  
   func deleteTransaction(_ transaction: TransactionEntity) {
     context.delete(transaction)
     saveContext()

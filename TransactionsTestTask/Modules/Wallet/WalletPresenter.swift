@@ -21,6 +21,7 @@ class WalletPresenter: NSObject, WalletViewToPresenter {
   
   var items: [TransactionGroup] = []
   var currentBalance: Double = 0.0
+  var hasMoreData: Bool = false
   
   func viewDidLoad() {
     interactor?.setupObservers()
@@ -32,6 +33,10 @@ class WalletPresenter: NSObject, WalletViewToPresenter {
   
   func routeToTopUpBalance() {
     router?.showTopUpBalance()
+  }
+  
+  func loadMoreData() {
+    interactor?.loadMoreData()
   }
 }
 
@@ -45,6 +50,10 @@ extension WalletPresenter: WalletInteractorToPresenter {
     currentBalance = balance
     let stringBalance = String(balance)
     viewController?.updateBalance(stringBalance)
+  }
+  
+  func updateHasMoreData(_ hasMore: Bool) {
+    hasMoreData = hasMore
   }
 }
 

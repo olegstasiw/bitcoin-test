@@ -16,27 +16,38 @@ class TransactionService: ObservableObject {
   
   @Published var transactions: [TransactionGroup] = []
   @Published var currentBalance: Double = 0.0
+  @Published var isLoading: Bool = false
+  @Published var hasMoreData: Bool = false
   
   private var cancellables = Set<AnyCancellable>()
+  private var currentOffset: Int = 0
+  private let pageSize: Int = 10
+  private var isLoadingMore: Bool = false
   
   private init() {
     setupObservers()
-    loadData()
+    loadInitialData()
   }
   
   private func setupObservers() {
     NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave, object: coreDataManager.context)
       .sink { [weak self] _ in
-        self?.loadData()
+        self?.refreshData()
       }
       .store(in: &cancellables)
   }
   
-  private func loadData() {
+  private func loadInitialData() {
+    guard !isLoading else { return }
+    isLoading = true
+    currentOffset = 0
+    
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       guard let self = self else { return }
       
-      let transactionEntities = self.coreDataManager.fetchAllTransactions()
+      let transactionEntities = self.coreDataManager.fetchTransactionsWithPagination(offset: 0, limit: self.pageSize)
+      let totalCount = self.coreDataManager.getTotalTransactionCount()
+      
       let transactions = transactionEntities.map { entity in
         Transaction(
           amount: entity.amount,
@@ -48,13 +59,68 @@ class TransactionService: ObservableObject {
       }
       
       let groupedTransactions = self.groupTransactionsByDate(transactions)
-      let balance = self.calculateBalance(from: transactionEntities)
+      let balance = self.calculateBalance(from: self.coreDataManager.fetchAllTransactions())
       
       DispatchQueue.main.async {
         self.transactions = groupedTransactions
         self.currentBalance = balance
+        self.currentOffset = transactionEntities.count
+        self.hasMoreData = self.currentOffset < totalCount
+        self.isLoading = false
       }
     }
+  }
+  
+  func loadMoreData() {
+    guard !isLoadingMore && hasMoreData else { return }
+    isLoadingMore = true
+    
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      guard let self = self else { return }
+      
+      let transactionEntities = self.coreDataManager.fetchTransactionsWithPagination(offset: self.currentOffset, limit: self.pageSize)
+      let totalCount = self.coreDataManager.getTotalTransactionCount()
+      
+      let newTransactions = transactionEntities.map { entity in
+        Transaction(
+          amount: entity.amount,
+          type: TransactionType(rawValue: entity.type ?? "expense") ?? .expense,
+          category: entity.category.flatMap { TransactionCategory(rawValue: $0) },
+          date: entity.date ?? Date(),
+          description: entity.transactionDescription
+        )
+      }
+      
+      let newGroupedTransactions = self.groupTransactionsByDate(newTransactions)
+      
+      DispatchQueue.main.async {
+        // Merge new transactions with existing ones
+        var updatedTransactions = self.transactions
+        
+        for newGroup in newGroupedTransactions {
+          if let existingIndex = updatedTransactions.firstIndex(where: { $0.date == newGroup.date }) {
+            // Merge transactions for the same date
+            var existingTransactions = updatedTransactions[existingIndex].transactions
+            existingTransactions.append(contentsOf: newGroup.transactions)
+            updatedTransactions[existingIndex] = TransactionGroup(date: newGroup.date, transactions: existingTransactions)
+          } else {
+            // Add new date group
+            updatedTransactions.append(newGroup)
+          }
+        }
+        
+        updatedTransactions.sort { $0.date > $1.date }
+        
+        self.transactions = updatedTransactions
+        self.currentOffset += transactionEntities.count
+        self.hasMoreData = self.currentOffset < totalCount
+        self.isLoadingMore = false
+      }
+    }
+  }
+  
+  private func refreshData() {
+    loadInitialData()
   }
   
   private func calculateBalance(from entities: [TransactionEntity]) -> Double {

@@ -84,6 +84,20 @@ extension WalletViewController: UITableViewDelegate {
     print("Selected row at \(indexPath)")
   }
   
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    // Check if this is the last cell in the last section
+    let lastSection = tableView.numberOfSections - 1
+    let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
+    
+    if indexPath.section == lastSection && indexPath.row == lastRow {
+      // This is the last cell, check if we need to load more data
+      if let presenter = presenter, presenter.hasMoreData {
+        presenter.loadMoreData()
+        print("Loading more data for section \(indexPath.section), row \(indexPath.row)")
+      }
+    }
+  }
+  
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     guard let items = presenter?.items else {
       return nil

@@ -33,9 +33,20 @@ class WalletInteractor: WalletPresenterToInteractor {
         self?.presenter?.updateCurrentBalance(balance)
       }
       .store(in: &cancellables)
+    
+    transactionService.$hasMoreData
+      .receive(on: DispatchQueue.main)
+      .sink { [weak self] hasMore in
+        self?.presenter?.updateHasMoreData(hasMore)
+      }
+      .store(in: &cancellables)
   }
   
   func addTransaction(transaction: Transaction) {
     transactionService.addTransaction(transaction: transaction)
+  }
+  
+  func loadMoreData() {
+    transactionService.loadMoreData()
   }
 }
