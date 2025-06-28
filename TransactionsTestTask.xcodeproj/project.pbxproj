@@ -34,6 +34,16 @@
 		21E04A5D2E0F2083006475BC /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A5C2E0F2083006475BC /* Transaction.swift */; };
 		21E04A5F2E0F2093006475BC /* TransactionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A5E2E0F2093006475BC /* TransactionCategory.swift */; };
 		21E04A612E0F20A5006475BC /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A602E0F20A5006475BC /* TransactionType.swift */; };
+		21E04A632E0F234D006475BC /* AddTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A622E0F234D006475BC /* AddTransactionViewController.swift */; };
+		21E04A652E0F2363006475BC /* AddTransactionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A642E0F2363006475BC /* AddTransactionPresenter.swift */; };
+		21E04A672E0F236B006475BC /* AddTransactionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A662E0F236B006475BC /* AddTransactionInteractor.swift */; };
+		21E04A692E0F2372006475BC /* AddTransactionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A682E0F2372006475BC /* AddTransactionRouter.swift */; };
+		21E04A6B2E0F2378006475BC /* AddTransactionAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A6A2E0F2378006475BC /* AddTransactionAssembly.swift */; };
+		21E04A6D2E0F2381006475BC /* AddTransactionProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A6C2E0F2381006475BC /* AddTransactionProtocols.swift */; };
+		21E04A702E0F25BD006475BC /* PrimaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A6F2E0F25BD006475BC /* PrimaryTextField.swift */; };
+		21E04AB82E0FC994006475BC /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04AB72E0FC994006475BC /* Extension+UIView.swift */; };
+		21E04ABB2E0FC9CD006475BC /* AddTransactionCategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04ABA2E0FC9CD006475BC /* AddTransactionCategoryPicker.swift */; };
+		21E04ABD2E0FC9FF006475BC /* AddTransactionPickerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04ABC2E0FC9FF006475BC /* AddTransactionPickerRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +95,16 @@
 		21E04A5C2E0F2083006475BC /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		21E04A5E2E0F2093006475BC /* TransactionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCategory.swift; sourceTree = "<group>"; };
 		21E04A602E0F20A5006475BC /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
+		21E04A622E0F234D006475BC /* AddTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionViewController.swift; sourceTree = "<group>"; };
+		21E04A642E0F2363006475BC /* AddTransactionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionPresenter.swift; sourceTree = "<group>"; };
+		21E04A662E0F236B006475BC /* AddTransactionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionInteractor.swift; sourceTree = "<group>"; };
+		21E04A682E0F2372006475BC /* AddTransactionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionRouter.swift; sourceTree = "<group>"; };
+		21E04A6A2E0F2378006475BC /* AddTransactionAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionAssembly.swift; sourceTree = "<group>"; };
+		21E04A6C2E0F2381006475BC /* AddTransactionProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionProtocols.swift; sourceTree = "<group>"; };
+		21E04A6F2E0F25BD006475BC /* PrimaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTextField.swift; sourceTree = "<group>"; };
+		21E04AB72E0FC994006475BC /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
+		21E04ABA2E0FC9CD006475BC /* AddTransactionCategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionCategoryPicker.swift; sourceTree = "<group>"; };
+		21E04ABC2E0FC9FF006475BC /* AddTransactionPickerRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionPickerRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +191,7 @@
 				1CA3B6662D22B0F600176711 /* Info.plist */,
 				1CA3B65E2D22B0F500176711 /* TransactionsTestTask.xcdatamodeld */,
 				21E04A5B2E0F2062006475BC /* Models */,
+				21E04AB92E0FC99A006475BC /* Helpers */,
 			);
 			path = TransactionsTestTask;
 			sourceTree = "<group>";
@@ -206,6 +227,7 @@
 			children = (
 				21E04A382E0F0CA2006475BC /* Wallet */,
 				21E04A472E0F0D71006475BC /* Common */,
+				21E04A6E2E0F239E006475BC /* AddTransaction */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -228,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				21E04A452E0F0D6D006475BC /* PrimaryButton.swift */,
+				21E04A6F2E0F25BD006475BC /* PrimaryTextField.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -251,6 +274,37 @@
 				21E04A602E0F20A5006475BC /* TransactionType.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		21E04A6E2E0F239E006475BC /* AddTransaction */ = {
+			isa = PBXGroup;
+			children = (
+				21E04A622E0F234D006475BC /* AddTransactionViewController.swift */,
+				21E04A642E0F2363006475BC /* AddTransactionPresenter.swift */,
+				21E04A662E0F236B006475BC /* AddTransactionInteractor.swift */,
+				21E04A682E0F2372006475BC /* AddTransactionRouter.swift */,
+				21E04A6A2E0F2378006475BC /* AddTransactionAssembly.swift */,
+				21E04A6C2E0F2381006475BC /* AddTransactionProtocols.swift */,
+				21E04ABE2E0FCA9A006475BC /* Views */,
+			);
+			path = AddTransaction;
+			sourceTree = "<group>";
+		};
+		21E04AB92E0FC99A006475BC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				21E04AB72E0FC994006475BC /* Extension+UIView.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		21E04ABE2E0FCA9A006475BC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				21E04ABA2E0FC9CD006475BC /* AddTransactionCategoryPicker.swift */,
+				21E04ABC2E0FC9FF006475BC /* AddTransactionPickerRowView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -383,6 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21E04ABD2E0FC9FF006475BC /* AddTransactionPickerRowView.swift in Sources */,
 				0D1540612D22EF5D00D6D63F /* AnalyticsEvent.swift in Sources */,
 				21E04A402E0F0CE5006475BC /* WalleteAssembly.swift in Sources */,
 				21E04A4C2E0F183D006475BC /* TransactionCell.swift in Sources */,
@@ -391,19 +446,28 @@
 				0DF1D1432D22DCD8001626E7 /* PerformOnce.swift in Sources */,
 				21E04A3C2E0F0CC5006475BC /* WalletInteractor.swift in Sources */,
 				21E04A502E0F18B2006475BC /* TransactionService.swift in Sources */,
+				21E04A702E0F25BD006475BC /* PrimaryTextField.swift in Sources */,
 				21E04A5F2E0F2093006475BC /* TransactionCategory.swift in Sources */,
 				0DF1D1452D22DD06001626E7 /* BitcoinRateService.swift in Sources */,
+				21E04ABB2E0FC9CD006475BC /* AddTransactionCategoryPicker.swift in Sources */,
+				21E04A6B2E0F2378006475BC /* AddTransactionAssembly.swift in Sources */,
 				21E04A3A2E0F0CB6006475BC /* WalletPresenter.swift in Sources */,
 				0DF1D1472D22DD4A001626E7 /* AnalyticsService.swift in Sources */,
 				21E04A582E0F1C99006475BC /* CoreDataManager.swift in Sources */,
+				21E04A692E0F2372006475BC /* AddTransactionRouter.swift in Sources */,
+				21E04A652E0F2363006475BC /* AddTransactionPresenter.swift in Sources */,
 				1CA3B6562D22B0F500176711 /* AppDelegate.swift in Sources */,
+				21E04AB82E0FC994006475BC /* Extension+UIView.swift in Sources */,
 				21E04A5D2E0F2083006475BC /* Transaction.swift in Sources */,
 				21E04A372E0F0C9D006475BC /* WalletViewController.swift in Sources */,
 				1CA3B6582D22B0F500176711 /* SceneDelegate.swift in Sources */,
+				21E04A632E0F234D006475BC /* AddTransactionViewController.swift in Sources */,
 				21E04A5A2E0F205F006475BC /* TransactionGroup.swift in Sources */,
+				21E04A672E0F236B006475BC /* AddTransactionInteractor.swift in Sources */,
 				1CA3B6602D22B0F500176711 /* TransactionsTestTask.xcdatamodeld in Sources */,
 				21E04A492E0F0D8E006475BC /* WalletBalanceView.swift in Sources */,
 				21E04A612E0F20A5006475BC /* TransactionType.swift in Sources */,
+				21E04A6D2E0F2381006475BC /* AddTransactionProtocols.swift in Sources */,
 				21E04A462E0F0D6D006475BC /* PrimaryButton.swift in Sources */,
 				0DF1D1402D22DC51001626E7 /* ServicesAssembler.swift in Sources */,
 				21E04A3E2E0F0CD4006475BC /* WalletRouter.swift in Sources */,

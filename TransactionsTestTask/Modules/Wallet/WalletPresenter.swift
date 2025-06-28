@@ -24,6 +24,10 @@ class WalletPresenter: NSObject, WalletViewToPresenter {
   func viewDidLoad() {
     interactor?.setupObservers()
   }
+  
+  func routeToAddTransaction() {
+    router?.showAddTransaction()
+  }
 }
 
 extension WalletPresenter: WalletInteractorToPresenter {
@@ -33,4 +37,8 @@ extension WalletPresenter: WalletInteractorToPresenter {
   }
 }
 
-extension WalletPresenter: WalletRouterToPresenter { }
+extension WalletPresenter: WalletRouterToPresenter {
+  func addNewTransaction(transaction: Transaction) {
+    interactor?.addTransaction(transaction: transaction)
+  }
+}

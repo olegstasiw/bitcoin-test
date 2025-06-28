@@ -72,6 +72,14 @@ class TransactionService: ObservableObject {
     return balance
   }
   
+  func addTransaction(transaction: Transaction) {
+    addTransaction(amount: transaction.amount,
+                   type: transaction.type,
+                   category: transaction.category,
+                   date: transaction.date,
+                   description: transaction.description)
+  }
+  
   func addTransaction(amount: Double, type: TransactionType, category: TransactionCategory? = nil, date: Date = Date(), description: String? = nil) {
     coreDataManager.createTransaction(
       amount: amount,

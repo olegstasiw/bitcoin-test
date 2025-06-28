@@ -20,18 +20,22 @@ class WalletInteractor: WalletPresenterToInteractor {
   }
   
   func setupObservers() {
-    TransactionService.shared.$transactions
+    transactionService.$transactions
       .receive(on: DispatchQueue.main)
       .sink { [weak self] transactions in
         self?.presenter?.updateTransactions(transactions: transactions)
       }
       .store(in: &cancellables)
     
-    TransactionService.shared.$currentBalance
+    transactionService.$currentBalance
       .receive(on: DispatchQueue.main)
       .sink { [weak self] balance in
         // to do
       }
       .store(in: &cancellables)
+  }
+  
+  func addTransaction(transaction: Transaction) {
+    transactionService.addTransaction(transaction: transaction)
   }
 }

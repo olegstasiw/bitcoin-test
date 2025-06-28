@@ -7,11 +7,21 @@
 
 import UIKit
 
-class WalletRouter {
+class WalletRouter: WalletPresenterToRouter {
   
   weak var presenter: WalletRouterToPresenter?
   
   weak var owner: UIViewController?
+  
+  func showAddTransaction() {
+    let assemly = AddTransactionAssembly()
+    let viewController = assemly.makeModule(output: self)
+    owner?.present(viewController, animated: true)
+  }
 }
 
-extension WalletRouter: WalletPresenterToRouter {}
+extension WalletRouter: AddTransactionInteractorOutput {
+  func addTransaction(transaction: Transaction) {
+    presenter?.addNewTransaction(transaction: transaction)
+  }
+}

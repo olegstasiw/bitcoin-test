@@ -102,7 +102,9 @@ extension WalletViewController: UITableViewDelegate {
 }
 
 extension WalletViewController: WalletBalanceViewDelegate {
-  func didTapAddTransaction() {}
+  func didTapAddTransaction() {
+    presenter?.routeToAddTransaction()
+  }
   
   func didTapTopUp() {}
 }
