@@ -25,10 +25,12 @@ protocol WalletPresenterToInteractor {
 
 protocol WalletPresenterToView: AnyObject {
   func updateTransactions()
+  func updateBalance(_ balance: String)
 }
 
 protocol WalletInteractorToPresenter: AnyObject {
   func updateTransactions(transactions: [TransactionGroup])
+  func updateCurrentBalance(_ balance: Double)
 }
 
 protocol WalletRouterToPresenter: AnyObject {

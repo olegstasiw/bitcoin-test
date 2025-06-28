@@ -118,4 +118,11 @@ extension WalletViewController: WalletPresenterToView {
         }
     }
   }
+  
+  func updateBalance(_ balance: String) {
+    DispatchQueue.main.async { [weak self] in
+      guard let self = self else { return }
+      self.balanceView.updateBalanceValue(balance)
+    }
+  }
 }

@@ -30,7 +30,7 @@ class WalletInteractor: WalletPresenterToInteractor {
     transactionService.$currentBalance
       .receive(on: DispatchQueue.main)
       .sink { [weak self] balance in
-        // to do
+        self?.presenter?.updateCurrentBalance(balance)
       }
       .store(in: &cancellables)
   }

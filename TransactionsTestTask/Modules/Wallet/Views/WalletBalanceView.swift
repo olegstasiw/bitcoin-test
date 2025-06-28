@@ -27,7 +27,7 @@ class WalletBalanceView: UIView {
     let view = UILabel()
     view.translatesAutoresizingMaskIntoConstraints = false
     view.text = "$0.00"
-    view.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+    view.font = UIFont.systemFont(ofSize: 24, weight: .bold)
     view.textColor = .black
     return view
   }()
@@ -65,6 +65,10 @@ class WalletBalanceView: UIView {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  func updateBalanceValue(_ value: String) {
+    balanceLabel.text = value
   }
   
   private func setupView() {

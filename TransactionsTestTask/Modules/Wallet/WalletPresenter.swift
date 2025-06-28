@@ -20,6 +20,7 @@ class WalletPresenter: NSObject, WalletViewToPresenter {
   var interactor: WalletPresenterToInteractor?
   
   var items: [TransactionGroup] = []
+  var currentBalance: Double = 0.0
   
   func viewDidLoad() {
     interactor?.setupObservers()
@@ -34,6 +35,12 @@ extension WalletPresenter: WalletInteractorToPresenter {
   func updateTransactions(transactions: [TransactionGroup]) {
     items = transactions
     viewController?.updateTransactions()
+  }
+  
+  func updateCurrentBalance(_ balance: Double) {
+    currentBalance = balance
+    let stringBalance = String(balance)
+    viewController?.updateBalance(stringBalance)
   }
 }
 
