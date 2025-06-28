@@ -22,9 +22,19 @@ class WalletPresenter: NSObject, WalletViewToPresenter {
   var items: [TransactionGroup] = []
   var currentBalance: Double = 0.0
   var hasMoreData: Bool = false
+  var currentBitcoinRate: String = ""
+  
+  lazy var formatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MMM d, HH:mm"
+    formatter.timeZone = TimeZone.current
+    return formatter
+  }()
   
   func viewDidLoad() {
     interactor?.setupObservers()
+    interactor?.loadBitcoinRate()
+    interactor?.startTimerToFetchBitcoinRate()
   }
   
   func routeToAddTransaction() {
@@ -54,6 +64,16 @@ extension WalletPresenter: WalletInteractorToPresenter {
   
   func updateHasMoreData(_ hasMore: Bool) {
     hasMoreData = hasMore
+  }
+  
+  func updateBitcoinRate(_ rate: BitcoinRate) {
+    let price = rate.price
+    let doublePrice = Double(price) ?? 0.0
+    let formattedPrice = String(format: "%.2f", doublePrice)
+    currentBitcoinRate = formattedPrice
+    let lastUpdated = formatter.string(from: rate.date)
+
+    viewController?.updateBitcoinRate(formattedPrice, lastUpdated: lastUpdated)
   }
 }
 

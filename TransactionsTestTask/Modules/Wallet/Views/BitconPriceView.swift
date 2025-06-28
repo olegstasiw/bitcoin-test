@@ -12,7 +12,7 @@ class BitconPriceView: UIView {
   private lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.text = "Bitcoin exchange rate in dollars"
+    label.text = "Bitcoin rate in dollars"
     label.font = UIFont.boldSystemFont(ofSize: 12)
     label.textColor = .secondaryLabel
     label.textAlignment = .left
@@ -54,6 +54,11 @@ class BitconPriceView: UIView {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  func updatePrice(_ price: String, lastUpdated: String) {
+    priceLabel.text = "$\(price)"
+    dateLabel.text = "Last updated: \(lastUpdated)"
   }
   
   private func setupView() {

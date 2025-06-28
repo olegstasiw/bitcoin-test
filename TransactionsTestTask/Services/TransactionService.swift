@@ -9,22 +9,35 @@ import Foundation
 import CoreData
 import Combine
 
-class TransactionService: ObservableObject {
-  
-  static let shared = TransactionService()
-  private let coreDataManager = CoreDataManager.shared
+protocol TransactionService: AnyObject {
+  var transactionsPublisher: Published<[TransactionGroup]>.Publisher { get }
+  var currentBalancePublisher: Published<Double>.Publisher { get }
+  var hasMoreDataPublisher: Published<Bool>.Publisher { get }
+  func loadMoreData()
+  func addTransaction(transaction: Transaction)
+}
+
+class TransactionServiceImpl: ObservableObject, TransactionService {
+
+  private let coreDataManager: CoreDataManagerProtocol
   
   @Published var transactions: [TransactionGroup] = []
-  @Published var currentBalance: Double = 0.0
-  @Published var isLoading: Bool = false
-  @Published var hasMoreData: Bool = false
+  var transactionsPublisher: Published<[TransactionGroup]>.Publisher { $transactions }
   
+  @Published var currentBalance: Double = 0.0
+  var currentBalancePublisher: Published<Double>.Publisher { $currentBalance }
+  
+  @Published var hasMoreData: Bool = false
+  var hasMoreDataPublisher: Published<Bool>.Publisher { $hasMoreData }
+  
+  private var isLoading: Bool = false
   private var cancellables = Set<AnyCancellable>()
   private var currentOffset: Int = 0
   private let pageSize: Int = 10
   private var isLoadingMore: Bool = false
   
-  private init() {
+  init(coreDataManager: CoreDataManagerProtocol) {
+    self.coreDataManager = coreDataManager
     setupObservers()
     loadInitialData()
   }
@@ -45,8 +58,8 @@ class TransactionService: ObservableObject {
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       guard let self = self else { return }
       
-      let transactionEntities = self.coreDataManager.fetchTransactionsWithPagination(offset: 0, limit: self.pageSize)
-      let totalCount = self.coreDataManager.getTotalTransactionCount()
+      let transactionEntities = self.fetchTransactionsWithPagination(offset: 0, limit: self.pageSize)
+      let totalCount = self.getTotalTransactionCount()
       
       let transactions = transactionEntities.map { entity in
         Transaction(
@@ -59,7 +72,7 @@ class TransactionService: ObservableObject {
       }
       
       let groupedTransactions = self.groupTransactionsByDate(transactions)
-      let balance = self.calculateBalance(from: self.coreDataManager.fetchAllTransactions())
+      let balance = self.calculateBalance(from: self.fetchAllTransactions())
       
       DispatchQueue.main.async {
         self.transactions = groupedTransactions
@@ -78,8 +91,8 @@ class TransactionService: ObservableObject {
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       guard let self = self else { return }
       
-      let transactionEntities = self.coreDataManager.fetchTransactionsWithPagination(offset: self.currentOffset, limit: self.pageSize)
-      let totalCount = self.coreDataManager.getTotalTransactionCount()
+      let transactionEntities = self.fetchTransactionsWithPagination(offset: self.currentOffset, limit: self.pageSize)
+      let totalCount = self.getTotalTransactionCount()
       
       let newTransactions = transactionEntities.map { entity in
         Transaction(
@@ -139,36 +152,11 @@ class TransactionService: ObservableObject {
   }
   
   func addTransaction(transaction: Transaction) {
-    addTransaction(amount: transaction.amount,
-                   type: transaction.type,
-                   category: transaction.category,
-                   date: transaction.date,
-                   description: transaction.description)
-  }
-  
-  func addTransaction(amount: Double, type: TransactionType, category: TransactionCategory? = nil, date: Date = Date(), description: String? = nil) {
-    coreDataManager.createTransaction(
-      amount: amount,
-      type: type,
-      category: category,
-      date: date,
-      description: description
-    )
-  }
-  
-  func deleteTransaction(_ transaction: Transaction) {
-    let transactionEntities = coreDataManager.fetchAllTransactions()
-    if let entityToDelete = transactionEntities.first(where: { entity in
-      entity.amount == transaction.amount &&
-      entity.type == transaction.type.rawValue &&
-      entity.date == transaction.date
-    }) {
-      coreDataManager.deleteTransaction(entityToDelete)
-    }
-  }
-  
-  func clearAllTransactions() {
-    coreDataManager.deleteAllTransactions()
+    createTransaction(amount: transaction.amount,
+                      type: transaction.type,
+                      category: transaction.category,
+                      date: transaction.date,
+                      description: transaction.description)
   }
   
   // MARK: - Helper Methods
@@ -189,6 +177,60 @@ class TransactionService: ObservableObject {
     
     return sortedDates.map { date in
       TransactionGroup(date: date, transactions: groupedTransactions[date] ?? [])
+    }
+  }
+  
+  // MARK: - Core Data Operations
+  
+  func createTransaction(amount: Double, type: TransactionType, category: TransactionCategory? = nil, date: Date = Date(), description: String? = nil) {
+    let context = coreDataManager.context
+    let transaction = TransactionEntity(context: context)
+    transaction.amount = amount
+    transaction.type = type.rawValue
+    transaction.category = category?.rawValue
+    transaction.date = date
+    transaction.transactionDescription = description
+    
+    coreDataManager.saveContext()
+  }
+  
+  func fetchAllTransactions() -> [TransactionEntity] {
+    let context = coreDataManager.context
+    let request: NSFetchRequest<TransactionEntity> = TransactionEntity.fetchRequest()
+    request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+    
+    do {
+      return try context.fetch(request)
+    } catch {
+      print("Error fetching transactions: \(error)")
+      return []
+    }
+  }
+  
+  func fetchTransactionsWithPagination(offset: Int, limit: Int) -> [TransactionEntity] {
+    let context = coreDataManager.context
+    let request: NSFetchRequest<TransactionEntity> = TransactionEntity.fetchRequest()
+    request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+    request.fetchOffset = offset
+    request.fetchLimit = limit
+    
+    do {
+      return try context.fetch(request)
+    } catch {
+      print("Error fetching transactions with pagination: \(error)")
+      return []
+    }
+  }
+  
+  func getTotalTransactionCount() -> Int {
+    let context = coreDataManager.context
+    let request: NSFetchRequest<TransactionEntity> = TransactionEntity.fetchRequest()
+    
+    do {
+      return try context.count(for: request)
+    } catch {
+      print("Error getting transaction count: \(error)")
+      return 0
     }
   }
 }

@@ -26,17 +26,21 @@ protocol WalletPresenterToInteractor {
   func setupObservers()
   func addTransaction(transaction: Transaction)
   func loadMoreData()
+  func loadBitcoinRate()
+  func startTimerToFetchBitcoinRate()
 }
 
 protocol WalletPresenterToView: AnyObject {
   func updateTransactions()
   func updateBalance(_ balance: String)
+  func updateBitcoinRate(_ rate: String, lastUpdated: String)
 }
 
 protocol WalletInteractorToPresenter: AnyObject {
   func updateTransactions(transactions: [TransactionGroup])
   func updateCurrentBalance(_ balance: Double)
   func updateHasMoreData(_ hasMore: Bool)
+  func updateBitcoinRate(_ rate: BitcoinRate)
 }
 
 protocol WalletRouterToPresenter: AnyObject {

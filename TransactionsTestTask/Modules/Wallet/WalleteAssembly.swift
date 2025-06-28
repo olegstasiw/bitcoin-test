@@ -10,7 +10,10 @@ import UIKit
 class WalleteAssembly {
   
   func makeModule() -> UIViewController {
-    let interactor = WalletInteractor(transactionService: TransactionService.shared)
+    let transactionService = ServicesAssembler.transactionService()
+    let bitcoinRateService = ServicesAssembler.bitcoinRateService()
+    let interactor = WalletInteractor(transactionService: transactionService,
+                                      bitcoinRateService: bitcoinRateService)
     let router = WalletRouter()
     let presenter = WalletPresenter()
     let vc = WalletViewController()

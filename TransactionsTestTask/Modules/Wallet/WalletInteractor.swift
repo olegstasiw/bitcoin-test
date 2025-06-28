@@ -12,29 +12,37 @@ class WalletInteractor: WalletPresenterToInteractor {
 
   weak var presenter: WalletInteractorToPresenter?
   private var cancellables = Set<AnyCancellable>()
-  
+  private var fetchRateTimer: Timer?
   private var transactionService: TransactionService
+  private let bitcoinRateService: BitcoinRateService
   
-  init(transactionService: TransactionService) {
+  init(transactionService: TransactionService,
+       bitcoinRateService: BitcoinRateService) {
     self.transactionService = transactionService
+    self.bitcoinRateService = bitcoinRateService
+  }
+  
+  deinit {
+    fetchRateTimer?.invalidate()
+    fetchRateTimer = nil
   }
   
   func setupObservers() {
-    transactionService.$transactions
+    transactionService.transactionsPublisher
       .receive(on: DispatchQueue.main)
       .sink { [weak self] transactions in
         self?.presenter?.updateTransactions(transactions: transactions)
       }
       .store(in: &cancellables)
     
-    transactionService.$currentBalance
+    transactionService.currentBalancePublisher
       .receive(on: DispatchQueue.main)
       .sink { [weak self] balance in
         self?.presenter?.updateCurrentBalance(balance)
       }
       .store(in: &cancellables)
     
-    transactionService.$hasMoreData
+    transactionService.hasMoreDataPublisher
       .receive(on: DispatchQueue.main)
       .sink { [weak self] hasMore in
         self?.presenter?.updateHasMoreData(hasMore)
@@ -48,5 +56,25 @@ class WalletInteractor: WalletPresenterToInteractor {
   
   func loadMoreData() {
     transactionService.loadMoreData()
+  }
+  
+  func loadBitcoinRate() {
+    bitcoinRateService.fetchCurrentBTCPrice { [weak self] result in
+      switch result {
+      case .success(let rate):
+        self?.presenter?.updateBitcoinRate(rate)
+      case .failure(let error):
+        print("Error fetching Bitcoin rate: \(error.localizedDescription)")
+      }
+    }
+  }
+  
+  func startTimerToFetchBitcoinRate() {
+    fetchRateTimer?.invalidate() // Invalidate any existing timer
+    fetchRateTimer = nil
+    fetchRateTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+      guard let self = self else { return }
+      self.loadBitcoinRate()
+    }
   }
 }

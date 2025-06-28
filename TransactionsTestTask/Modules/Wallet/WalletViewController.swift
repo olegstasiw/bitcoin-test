@@ -104,7 +104,6 @@ extension WalletViewController: UITableViewDelegate {
       // This is the last cell, check if we need to load more data
       if let presenter = presenter, presenter.hasMoreData {
         presenter.loadMoreData()
-        print("Loading more data for section \(indexPath.section), row \(indexPath.row)")
       }
     }
   }
@@ -151,6 +150,13 @@ extension WalletViewController: WalletPresenterToView {
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
       self.balanceView.updateBalanceValue(balance)
+    }
+  }
+  
+  func updateBitcoinRate(_ rate: String, lastUpdated: String) {
+    DispatchQueue.main.async { [weak self] in
+      guard let self = self else { return }
+      self.priceView.updatePrice(rate, lastUpdated: lastUpdated)
     }
   }
 }
