@@ -9,6 +9,12 @@ import UIKit
 
 class WalletViewController: UIViewController {
   
+  private lazy var priceView: BitconPriceView = {
+    let view = BitconPriceView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+
   private lazy var balanceView: WalletBalanceView = {
     let view = WalletBalanceView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -39,13 +45,18 @@ class WalletViewController: UIViewController {
   
   private func setupUI() {
     view.backgroundColor = .mainBackground
+    view.addSubview(priceView)
     view.addSubview(balanceView)
     view.addSubview(transactionsTableView)
   }
   
   private func setupConstraints() {
     NSLayoutConstraint.activate([
-      balanceView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+      priceView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      priceView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+      priceView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+      
+      balanceView.topAnchor.constraint(equalTo: priceView.bottomAnchor, constant: 8),
       balanceView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
       balanceView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
       
