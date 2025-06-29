@@ -18,7 +18,7 @@ class WalletBalanceView: UIView {
     let view = UILabel()
     view.translatesAutoresizingMaskIntoConstraints = false
     view.text = "Balance"
-    view.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+    view.font = UIFont.systemFont(ofSize: 16, weight: .bold)
     view.textColor = .black
     return view
   }()

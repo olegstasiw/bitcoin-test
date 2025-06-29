@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BitcoinRate {
+struct BitcoinRate: Codable {
   let price: String
   let date: Date
 }

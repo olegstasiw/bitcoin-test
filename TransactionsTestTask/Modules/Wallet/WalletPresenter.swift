@@ -33,6 +33,7 @@ class WalletPresenter: NSObject, WalletViewToPresenter {
   
   func viewDidLoad() {
     interactor?.setupObservers()
+    interactor?.loadBitcoinRateFromCache()
     interactor?.loadBitcoinRate()
     interactor?.startTimerToFetchBitcoinRate()
   }

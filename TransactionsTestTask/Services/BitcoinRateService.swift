@@ -9,6 +9,7 @@ import Combine
 
 protocol BitcoinRateService: AnyObject {
   func fetchCurrentBTCPrice(completion: @escaping (Result<BitcoinRate, Error>) -> Void)
+  func getCachedBitcoinRate() -> BitcoinRate?
   var rateUpdatePublisher: PassthroughSubject<BitcoinRate, Never> { get }
 }
 
@@ -32,9 +33,11 @@ final class BitcoinRateServiceImpl {
   
   private let session = URLSession(configuration: .default)
   var rateUpdatePublisher: PassthroughSubject<BitcoinRate, Never> = PassthroughSubject()
-  // MARK: - Init
+  var bitcoinRateCacheManager: BitcoinRateCacheManager
   
-  init() {}
+  init(bitcoinRateCacheManager: BitcoinRateCacheManager) {
+    self.bitcoinRateCacheManager = bitcoinRateCacheManager
+  }
 }
 
 extension BitcoinRateServiceImpl: BitcoinRateService {
@@ -67,6 +70,7 @@ extension BitcoinRateServiceImpl: BitcoinRateService {
         let decoded = try JSONDecoder().decode(BitcoinRateResponse.self, from: data)
         let rate = BitcoinRate(price: decoded.price, date: Date())
         self?.rateUpdatePublisher.send(rate)
+        self?.bitcoinRateCacheManager.cacheBitcoinRate(rate)
         completion(.success(rate))
       } catch {
         completion(.failure(error))
@@ -74,5 +78,9 @@ extension BitcoinRateServiceImpl: BitcoinRateService {
     }
     
     task.resume()
+  }
+  
+  func getCachedBitcoinRate() -> BitcoinRate? {
+    return bitcoinRateCacheManager.getCachedBitcoinRate()
   }
 }

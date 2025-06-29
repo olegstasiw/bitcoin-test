@@ -77,4 +77,11 @@ class WalletInteractor: WalletPresenterToInteractor {
       self.loadBitcoinRate()
     }
   }
+  
+  func loadBitcoinRateFromCache() {
+    guard let cachedRate = bitcoinRateService.getCachedBitcoinRate() else {
+      return
+    }
+    presenter?.updateBitcoinRate(cachedRate)
+  }
 }

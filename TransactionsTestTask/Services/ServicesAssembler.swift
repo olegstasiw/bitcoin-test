@@ -9,8 +9,14 @@ import Combine
 
 enum ServicesAssembler {
   
+  static let bitcoinRateCacheManager: PerformOnce<BitcoinRateCacheManager> = {
+    let service = BitcoinRateCacheManagerImpl()
+    return { service }
+  }()
+  
   static let bitcoinRateService: PerformOnce<BitcoinRateService> = {
-    let service = BitcoinRateServiceImpl()
+    let cacheManager = bitcoinRateCacheManager()
+    let service = BitcoinRateServiceImpl(bitcoinRateCacheManager: cacheManager)
     return { service }
   }()
   

@@ -28,6 +28,7 @@ protocol WalletPresenterToInteractor {
   func loadMoreData()
   func loadBitcoinRate()
   func startTimerToFetchBitcoinRate()
+  func loadBitcoinRateFromCache()
 }
 
 protocol WalletPresenterToView: AnyObject {

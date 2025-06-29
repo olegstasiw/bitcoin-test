@@ -48,6 +48,8 @@ class WalletViewController: UIViewController {
     view.addSubview(priceView)
     view.addSubview(balanceView)
     view.addSubview(transactionsTableView)
+    
+    title = "Bicoin Wallet"
   }
   
   private func setupConstraints() {
