@@ -5,14 +5,11 @@
 //
 
 import Foundation
+import Combine
 
-/// Rate Service should fetch data from https://api.coindesk.com/v1/bpi/currentprice.json
-/// Fetching should be scheduled with dynamic update interval
-/// Rate should be cached for the offline mode
-/// Every successful fetch should be logged with analytics service
-/// The service should be covered by unit tests
 protocol BitcoinRateService: AnyObject {
   func fetchCurrentBTCPrice(completion: @escaping (Result<BitcoinRate, Error>) -> Void)
+  var rateUpdatePublisher: PassthroughSubject<BitcoinRate, Never> { get }
 }
 
 private struct BitcoinRateResponse: Decodable {
@@ -34,7 +31,7 @@ final class BitcoinRateServiceImpl {
   }
   
   private let session = URLSession(configuration: .default)
-  
+  var rateUpdatePublisher: PassthroughSubject<BitcoinRate, Never> = PassthroughSubject()
   // MARK: - Init
   
   init() {}
@@ -57,7 +54,7 @@ extension BitcoinRateServiceImpl: BitcoinRateService {
       return
     }
     
-    let task = session.dataTask(with: url) { data, _, error in
+    let task = session.dataTask(with: url) { [weak self] data, _, error in
       if let error = error {
         completion(.failure(error))
         return
@@ -69,6 +66,7 @@ extension BitcoinRateServiceImpl: BitcoinRateService {
       do {
         let decoded = try JSONDecoder().decode(BitcoinRateResponse.self, from: data)
         let rate = BitcoinRate(price: decoded.price, date: Date())
+        self?.rateUpdatePublisher.send(rate)
         completion(.success(rate))
       } catch {
         completion(.failure(error))

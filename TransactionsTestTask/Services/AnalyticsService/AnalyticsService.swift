@@ -22,9 +22,7 @@ final class AnalyticsServiceImpl {
   
   // MARK: - Init
   
-  init() {
-    print("sadasdasdadsasd")
-  }
+  init() {}
 }
 
 extension AnalyticsServiceImpl: AnalyticsService {
@@ -37,5 +35,6 @@ extension AnalyticsServiceImpl: AnalyticsService {
     )
     
     events.append(event)
+    print("Event tracked: \(event.name) with parameters: \(event.parameters) at \(event.date)")
   }
 }

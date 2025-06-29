@@ -42,48 +42,6 @@ class TransactionServiceImpl: ObservableObject, TransactionService {
     loadInitialData()
   }
   
-  private func setupObservers() {
-    NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave, object: coreDataManager.context)
-      .sink { [weak self] _ in
-        self?.refreshData()
-      }
-      .store(in: &cancellables)
-  }
-  
-  private func loadInitialData() {
-    guard !isLoading else { return }
-    isLoading = true
-    currentOffset = 0
-    
-    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-      guard let self = self else { return }
-      
-      let transactionEntities = self.fetchTransactionsWithPagination(offset: 0, limit: self.pageSize)
-      let totalCount = self.getTotalTransactionCount()
-      
-      let transactions = transactionEntities.map { entity in
-        Transaction(
-          amount: entity.amount,
-          type: TransactionType(rawValue: entity.type ?? "expense") ?? .expense,
-          category: entity.category.flatMap { TransactionCategory(rawValue: $0) },
-          date: entity.date ?? Date(),
-          description: entity.transactionDescription
-        )
-      }
-      
-      let groupedTransactions = self.groupTransactionsByDate(transactions)
-      let balance = self.calculateBalance(from: self.fetchAllTransactions())
-      
-      DispatchQueue.main.async {
-        self.transactions = groupedTransactions
-        self.currentBalance = balance
-        self.currentOffset = transactionEntities.count
-        self.hasMoreData = self.currentOffset < totalCount
-        self.isLoading = false
-      }
-    }
-  }
-  
   func loadMoreData() {
     guard !isLoadingMore && hasMoreData else { return }
     isLoadingMore = true
@@ -132,6 +90,56 @@ class TransactionServiceImpl: ObservableObject, TransactionService {
     }
   }
   
+  func addTransaction(transaction: Transaction) {
+    createTransaction(amount: transaction.amount,
+                      type: transaction.type,
+                      category: transaction.category,
+                      date: transaction.date,
+                      description: transaction.description)
+  }
+  
+  private func setupObservers() {
+    NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave, object: coreDataManager.context)
+      .sink { [weak self] _ in
+        self?.refreshData()
+      }
+      .store(in: &cancellables)
+  }
+  
+  private func loadInitialData() {
+    guard !isLoading else { return }
+    isLoading = true
+    currentOffset = 0
+    
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      guard let self = self else { return }
+      
+      let transactionEntities = self.fetchTransactionsWithPagination(offset: 0, limit: self.pageSize)
+      let totalCount = self.getTotalTransactionCount()
+      
+      let transactions = transactionEntities.map { entity in
+        Transaction(
+          amount: entity.amount,
+          type: TransactionType(rawValue: entity.type ?? "expense") ?? .expense,
+          category: entity.category.flatMap { TransactionCategory(rawValue: $0) },
+          date: entity.date ?? Date(),
+          description: entity.transactionDescription
+        )
+      }
+      
+      let groupedTransactions = self.groupTransactionsByDate(transactions)
+      let balance = self.calculateBalance(from: self.fetchAllTransactions())
+      
+      DispatchQueue.main.async {
+        self.transactions = groupedTransactions
+        self.currentBalance = balance
+        self.currentOffset = transactionEntities.count
+        self.hasMoreData = self.currentOffset < totalCount
+        self.isLoading = false
+      }
+    }
+  }
+  
   private func refreshData() {
     loadInitialData()
   }
@@ -151,16 +159,6 @@ class TransactionServiceImpl: ObservableObject, TransactionService {
     return balance
   }
   
-  func addTransaction(transaction: Transaction) {
-    createTransaction(amount: transaction.amount,
-                      type: transaction.type,
-                      category: transaction.category,
-                      date: transaction.date,
-                      description: transaction.description)
-  }
-  
-  // MARK: - Helper Methods
-  
   private func groupTransactionsByDate(_ transactions: [Transaction]) -> [TransactionGroup] {
     let calendar = Calendar.current
     var groupedTransactions: [Date: [Transaction]] = [:]
@@ -179,8 +177,11 @@ class TransactionServiceImpl: ObservableObject, TransactionService {
       TransactionGroup(date: date, transactions: groupedTransactions[date] ?? [])
     }
   }
-  
-  // MARK: - Core Data Operations
+}
+
+// MARK: - Core Data Operations
+
+extension TransactionServiceImpl {
   
   func createTransaction(amount: Double, type: TransactionType, category: TransactionCategory? = nil, date: Date = Date(), description: String? = nil) {
     let context = coreDataManager.context

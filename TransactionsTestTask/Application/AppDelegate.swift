@@ -12,6 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     _ = CoreDataManager.shared.persistentContainer
+    _ = ServicesAssembler.rateListenerLogger
     return true
   }
   
