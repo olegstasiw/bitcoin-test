@@ -28,7 +28,7 @@ class RateListenerLoggerImpl: RateListenerLogger {
     let doubleRate = Double(rate.price) ?? 0.0
     analyticsService.trackEvent(
       name: "bitcoin_rate_update",
-      parameters: ["rate": String(format: "%.2f", doubleRate),]
+      parameters: ["rate": String(format: "%.2f", doubleRate)]
     )
   }
 }

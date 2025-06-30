@@ -6,14 +6,9 @@
 
 import Foundation
 
-/// Analytics Service is used for events logging
-/// The list of reasonable events is up to you
-/// It should be possible not only to track events but to get it from the service
-/// The minimal needed filters are: event name and date range
-/// The service should be covered by unit tests
 protocol AnalyticsService: AnyObject {
-  
   func trackEvent(name: String, parameters: [String: String])
+  func getTrackedEvents() -> [AnalyticsEvent]
 }
 
 final class AnalyticsServiceImpl {
@@ -27,12 +22,14 @@ final class AnalyticsServiceImpl {
 
 extension AnalyticsServiceImpl: AnalyticsService {
   
+  func getTrackedEvents() -> [AnalyticsEvent] {
+    return events
+  }
+  
   func trackEvent(name: String, parameters: [String: String]) {
-    let event = AnalyticsEvent(
-      name: name,
-      parameters: parameters,
-      date: .now
-    )
+    let event = AnalyticsEvent(name: name,
+                               parameters: parameters,
+                               date: .now)
     
     events.append(event)
     print("Event tracked: \(event.name) with parameters: \(event.parameters) at \(event.date)")
