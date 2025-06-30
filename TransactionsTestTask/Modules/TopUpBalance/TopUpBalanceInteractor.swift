@@ -8,7 +8,7 @@
 import Foundation
 
 class TopUpBalanceInteractor: TopUpBalancePresenterToInteractor {
-
+  
   weak var presenter: TopUpBalanceInteractorToPresenter?
   
   weak var output: TopUpBalanceInteractorOutput?

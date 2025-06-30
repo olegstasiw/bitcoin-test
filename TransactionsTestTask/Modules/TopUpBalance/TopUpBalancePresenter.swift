@@ -27,7 +27,7 @@ class TopUpBalancePresenter: NSObject, TopUpBalanceViewToPresenter {
       return
     }
     let transaction = Transaction(amount: amount, type: .income)
-      
+    
     interactor?.addBalance(transaction: transaction)
   }
 }

@@ -21,13 +21,13 @@ class TransactionServiceImpl: ObservableObject, TransactionService {
 
   private let coreDataManager: CoreDataManagerProtocol
   
-  @Published var transactions: [TransactionGroup] = []
+  @Published private var transactions: [TransactionGroup] = []
   var transactionsPublisher: Published<[TransactionGroup]>.Publisher { $transactions }
   
-  @Published var currentBalance: Double = 0.0
+  @Published private var currentBalance: Double = 0.0
   var currentBalancePublisher: Published<Double>.Publisher { $currentBalance }
   
-  @Published var hasMoreData: Bool = false
+  @Published private var hasMoreData: Bool = false
   var hasMoreDataPublisher: Published<Bool>.Publisher { $hasMoreData }
   
   private var isLoading: Bool = false
@@ -145,7 +145,7 @@ class TransactionServiceImpl: ObservableObject, TransactionService {
     var balance: Double = 0.0
     
     for entity in entities {
-      let type = TransactionType(rawValue: entity.type ?? "expense") ?? .expense
+      let type = TransactionType(rawValue: entity.type ?? TransactionType.expense.rawValue) ?? .expense
       if type == .income {
         balance += entity.amount
       } else {

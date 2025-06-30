@@ -46,7 +46,6 @@ final class TransactionServiceTests: XCTestCase {
     }
     let transactions = transactionService.fetchTransactionsWithPagination(offset: 0, limit: 2)
     XCTAssertEqual(transactions.count, 2)
-    
   }
   
   func testGetTotalTransactionCount() {

@@ -14,6 +14,15 @@ protocol WalletBalanceViewDelegate: AnyObject {
 
 class WalletBalanceView: UIView {
   
+  private struct Constants {
+    static let horizontalPadding: CGFloat = 16
+    static let balanceTopPadding: CGFloat = 16
+    static let labelTopPadding: CGFloat = 8
+    static let buttonSpacing: CGFloat = 16
+    static let buttonsVerticalPadding: CGFloat = 16
+    static let buttonHeight: CGFloat = 50
+  }
+  
   private lazy var balanceTitleLabel: UILabel = {
     let view = UILabel()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +46,7 @@ class WalletBalanceView: UIView {
     view.translatesAutoresizingMaskIntoConstraints = false
     view.axis = .horizontal
     view.distribution = .fillEqually
-    view.spacing = 16
+    view.spacing = Constants.buttonSpacing
     return view
   }()
   
@@ -86,21 +95,21 @@ class WalletBalanceView: UIView {
   
   private func setupConstraints() {
     NSLayoutConstraint.activate([
-      balanceTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-      balanceTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      balanceTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+      balanceTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: Constants.balanceTopPadding),
+      balanceTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.horizontalPadding),
+      balanceTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.horizontalPadding),
       
-      balanceLabel.topAnchor.constraint(equalTo: balanceTitleLabel.bottomAnchor, constant: 8),
-      balanceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      balanceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+      balanceLabel.topAnchor.constraint(equalTo: balanceTitleLabel.bottomAnchor, constant: Constants.labelTopPadding),
+      balanceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.horizontalPadding),
+      balanceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.horizontalPadding),
       
-      buttonsStackView.topAnchor.constraint(equalTo: balanceLabel.bottomAnchor, constant: 16),
-      buttonsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      buttonsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-      buttonsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+      buttonsStackView.topAnchor.constraint(equalTo: balanceLabel.bottomAnchor, constant: Constants.buttonsVerticalPadding),
+      buttonsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.horizontalPadding),
+      buttonsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.horizontalPadding),
+      buttonsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.buttonsVerticalPadding),
       
-      addTransactionButton.heightAnchor.constraint(equalToConstant: 50),
-      topUpButton.heightAnchor.constraint(equalToConstant: 50)
+      addTransactionButton.heightAnchor.constraint(equalToConstant: Constants.buttonHeight),
+      topUpButton.heightAnchor.constraint(equalToConstant: Constants.buttonHeight)
     ])
   }
   

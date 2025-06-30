@@ -9,6 +9,18 @@ import UIKit
 
 class TransactionCell: UITableViewCell {
   
+  private struct Constants {
+    static let amountLabelWidth: CGFloat = 80
+    static let horizontalPadding: CGFloat = 16
+    static let imageSize: CGFloat = 24
+    static let categoryLeadingPadding: CGFloat = 12
+    static let categoryTopPadding: CGFloat = 12
+    static let categoryTrailingPadding: CGFloat = 8
+    static let timeBottomPadding: CGFloat = 12
+    static let timeTopPadding: CGFloat = 2
+    static let timeTrailingPadding: CGFloat = 8
+  }
+  
   static let identifier = "TransactionCell"
   
   private lazy var iconImageView: UIImageView = {
@@ -65,23 +77,23 @@ class TransactionCell: UITableViewCell {
   
   private func setupConstraints() {
     NSLayoutConstraint.activate([
-      iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+      iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.horizontalPadding),
       iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-      iconImageView.widthAnchor.constraint(equalToConstant: 24),
-      iconImageView.heightAnchor.constraint(equalToConstant: 24),
+      iconImageView.widthAnchor.constraint(equalToConstant: Constants.imageSize),
+      iconImageView.heightAnchor.constraint(equalToConstant: Constants.imageSize),
       
-      categoryLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 12),
-      categoryLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-      categoryLabel.trailingAnchor.constraint(lessThanOrEqualTo: amountLabel.leadingAnchor, constant: -8),
+      categoryLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: Constants.categoryLeadingPadding),
+      categoryLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.categoryTopPadding),
+      categoryLabel.trailingAnchor.constraint(lessThanOrEqualTo: amountLabel.leadingAnchor, constant: -Constants.categoryLeadingPadding),
       
       timeLabel.leadingAnchor.constraint(equalTo: categoryLabel.leadingAnchor),
-      timeLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 2),
-      timeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-      timeLabel.trailingAnchor.constraint(lessThanOrEqualTo: amountLabel.leadingAnchor, constant: -8),
+      timeLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: Constants.timeTopPadding),
+      timeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.timeBottomPadding),
+      timeLabel.trailingAnchor.constraint(lessThanOrEqualTo: amountLabel.leadingAnchor, constant: -Constants.timeTrailingPadding),
       
-      amountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+      amountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.horizontalPadding),
       amountLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-      amountLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 80)
+      amountLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: Constants.amountLabelWidth),
     ])
   }
   

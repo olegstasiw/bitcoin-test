@@ -13,6 +13,14 @@ protocol AddBalanceViewDelegate: AnyObject {
 
 class AddBalanceView: UIView {
   
+  private struct Constants {
+    static let horizontalPadding: CGFloat = 16
+    static let verticalPadding: CGFloat = 16
+    static let buttonHeight: CGFloat = 50
+    static let textFieldHeight: CGFloat = 50
+    static let spacing: CGFloat = 16
+  }
+  
   private lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -56,25 +64,24 @@ class AddBalanceView: UIView {
     addButton.configure(title: "Add Balance", icon: UIImage(systemName: "plus.circle"))
     
     backgroundColor = .mainBackground
-    
   }
   
   func setupConstraints() {
     NSLayoutConstraint.activate([
-      titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+      titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: Constants.verticalPadding),
+      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.horizontalPadding),
+      titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.horizontalPadding),
       
-      amountTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
-      amountTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      amountTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-      amountTextField.heightAnchor.constraint(equalToConstant: 50),
+      amountTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.spacing),
+      amountTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.horizontalPadding),
+      amountTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.horizontalPadding),
+      amountTextField.heightAnchor.constraint(equalToConstant: Constants.textFieldHeight),
       
-      addButton.topAnchor.constraint(equalTo: amountTextField.bottomAnchor, constant: 16),
-      addButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      addButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-      addButton.heightAnchor.constraint(equalToConstant: 50),
-      addButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+      addButton.topAnchor.constraint(equalTo: amountTextField.bottomAnchor, constant: Constants.spacing),
+      addButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.horizontalPadding),
+      addButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.horizontalPadding),
+      addButton.heightAnchor.constraint(equalToConstant: Constants.buttonHeight),
+      addButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.verticalPadding)
     ])
   }
   

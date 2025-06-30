@@ -15,8 +15,6 @@ final class AnalyticsServiceImpl {
   
   private var events: [AnalyticsEvent] = []
   
-  // MARK: - Init
-  
   init() {}
 }
 

@@ -9,6 +9,11 @@ import UIKit
 
 class BitconPriceView: UIView {
   
+  private struct Constants {
+    static let horizontalPadding: CGFloat = 16
+    static let verticalPadding: CGFloat = 8
+  }
+  
   private lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -70,14 +75,14 @@ class BitconPriceView: UIView {
   
   private func setupConstraints() {
     NSLayoutConstraint.activate([
-      titleStackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-      titleStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      titleStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+      titleStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.verticalPadding),
+      titleStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.horizontalPadding),
+      titleStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.horizontalPadding),
 
-      priceLabel.topAnchor.constraint(equalTo: titleStackView.bottomAnchor, constant: 8),
-      priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      priceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-      priceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+      priceLabel.topAnchor.constraint(equalTo: titleStackView.bottomAnchor, constant: Constants.verticalPadding),
+      priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.horizontalPadding),
+      priceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.horizontalPadding),
+      priceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.verticalPadding)
     ])
   }
 }

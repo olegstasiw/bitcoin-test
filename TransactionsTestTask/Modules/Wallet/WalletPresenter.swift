@@ -18,7 +18,6 @@ class WalletPresenter: NSObject, WalletViewToPresenter {
   }
   
   var interactor: WalletPresenterToInteractor?
-  
   var items: [TransactionGroup] = []
   var currentBalance: Double = 0.0
   var hasMoreData: Bool = false

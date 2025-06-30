@@ -9,6 +9,11 @@ import UIKit
 
 class TransactionHeaderView: UIView {
   
+  private struct Constants {
+    static let horizontalPadding: CGFloat = 16
+    static let verticalPadding: CGFloat = 8
+  }
+  
   private lazy var dateLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -34,10 +39,10 @@ class TransactionHeaderView: UIView {
   
   private func setupConstraints() {
     NSLayoutConstraint.activate([
-      dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-      dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-      dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+      dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.horizontalPadding),
+      dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.horizontalPadding),
+      dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: Constants.verticalPadding),
+      dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.verticalPadding)
     ])
   }
   

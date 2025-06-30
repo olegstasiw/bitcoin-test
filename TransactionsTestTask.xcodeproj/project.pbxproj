@@ -319,6 +319,20 @@
 			path = TopUpBalance;
 			sourceTree = "<group>";
 		};
+		2142E59B2E12BE690071F6A4 /* TopUpBalance */ = {
+			isa = PBXGroup;
+			children = (
+				21E04ABF2E0FD462006475BC /* TopUpBalanceViewController.swift */,
+				21E04AC12E0FD487006475BC /* TopUpBalancePresenter.swift */,
+				21E04AC32E0FD498006475BC /* TopUpBalanceInteractor.swift */,
+				21E04AC52E0FD4A1006475BC /* TopUpBalanceRouter.swift */,
+				21E04AC72E0FD4A9006475BC /* TopUpBalanceAssembly.swift */,
+				21E04AC92E0FD4B3006475BC /* TopUpBalanceProtocols.swift */,
+				21E04ACD2E0FDD45006475BC /* Views */,
+			);
+			path = TopUpBalance;
+			sourceTree = "<group>";
+		};
 		21E04A332E0F0BA4006475BC /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,13 +357,7 @@
 				21E04A382E0F0CA2006475BC /* Wallet */,
 				21E04A472E0F0D71006475BC /* Common */,
 				21E04A6E2E0F239E006475BC /* AddTransaction */,
-				21E04ABF2E0FD462006475BC /* TopUpBalanceViewController.swift */,
-				21E04AC12E0FD487006475BC /* TopUpBalancePresenter.swift */,
-				21E04AC32E0FD498006475BC /* TopUpBalanceInteractor.swift */,
-				21E04AC52E0FD4A1006475BC /* TopUpBalanceRouter.swift */,
-				21E04AC72E0FD4A9006475BC /* TopUpBalanceAssembly.swift */,
-				21E04AC92E0FD4B3006475BC /* TopUpBalanceProtocols.swift */,
-				21E04ACD2E0FDD45006475BC /* Views */,
+				2142E59B2E12BE690071F6A4 /* TopUpBalance */,
 			);
 			path = Modules;
 			sourceTree = "<group>";

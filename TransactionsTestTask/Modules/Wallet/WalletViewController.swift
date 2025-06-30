@@ -9,6 +9,14 @@ import UIKit
 
 class WalletViewController: UIViewController {
   
+  private struct Constants {
+    static let horizontalPadding: CGFloat = 16
+    static let balanceTopPadding: CGFloat = 8
+    static let transactionsTopPadding: CGFloat = 16
+    static let tableViewRowHeight: CGFloat = 60
+    static let headerHeight: CGFloat = 40
+  }
+  
   private lazy var priceView: BitconPriceView = {
     let view = BitconPriceView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -55,16 +63,22 @@ class WalletViewController: UIViewController {
   private func setupConstraints() {
     NSLayoutConstraint.activate([
       priceView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      priceView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-      priceView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+      priceView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                         constant: Constants.horizontalPadding),
+      priceView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                          constant: -Constants.horizontalPadding),
       
-      balanceView.topAnchor.constraint(equalTo: priceView.bottomAnchor, constant: 8),
-      balanceView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-      balanceView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+      balanceView.topAnchor.constraint(equalTo: priceView.bottomAnchor, constant: Constants.balanceTopPadding),
+      balanceView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                           constant: Constants.horizontalPadding),
+      balanceView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                            constant: -Constants.horizontalPadding),
       
-      transactionsTableView.topAnchor.constraint(equalTo: balanceView.bottomAnchor, constant: 16),
-      transactionsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-      transactionsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+      transactionsTableView.topAnchor.constraint(equalTo: balanceView.bottomAnchor, constant: Constants.transactionsTopPadding),
+      transactionsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                                     constant: Constants.horizontalPadding),
+      transactionsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                                      constant: -Constants.horizontalPadding),
       transactionsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
     ])
   }
@@ -120,11 +134,11 @@ extension WalletViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 40
+    return Constants.headerHeight
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 60
+    return Constants.tableViewRowHeight
   }
 }
 

@@ -15,7 +15,7 @@ class RateListenerLoggerTests: XCTestCase {
   var mockAnalyticsService: MockAnalyticsService!
   var bitcoinRateService: BitcoinRateService!
   var bitcoinRateCacheManager: BitcoinRateCacheManager!
-    
+  
   override func setUp() {
     super.setUp()
     mockAnalyticsService = MockAnalyticsService()

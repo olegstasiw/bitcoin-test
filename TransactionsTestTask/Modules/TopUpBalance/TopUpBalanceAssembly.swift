@@ -14,7 +14,7 @@ class TopUpBalanceAssembly {
     let router = TopUpBalanceRouter()
     let presenter = TopUpBalancePresenter()
     let vc = TopUpBalanceViewController()
-
+    
     router.owner = vc
     
     presenter.viewController = vc

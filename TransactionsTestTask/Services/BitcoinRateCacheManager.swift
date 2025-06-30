@@ -21,7 +21,6 @@ class BitcoinRateCacheManagerImpl: BitcoinRateCacheManager {
   init(userDefaults: UserDefaults = .standard) {
     self.userDefaults = userDefaults
   }
-
   
   func cacheBitcoinRate(_ rate: BitcoinRate) {
     let encoder = JSONEncoder()

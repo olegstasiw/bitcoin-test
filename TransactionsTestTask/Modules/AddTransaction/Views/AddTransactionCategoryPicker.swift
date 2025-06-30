@@ -13,6 +13,10 @@ protocol AddTransactionCategoryPickerDelegate: AnyObject {
 
 class AddTransactionCategoryPicker: UIView {
   
+  private struct Constants {
+    static let titleLabelTopPadding: CGFloat = 16
+  }
+  
   private lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +65,7 @@ class AddTransactionCategoryPicker: UIView {
       titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
       titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
       
-      categoryPicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+      categoryPicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.titleLabelTopPadding),
       categoryPicker.leadingAnchor.constraint(equalTo: leadingAnchor),
       categoryPicker.trailingAnchor.constraint(equalTo: trailingAnchor),
       categoryPicker.bottomAnchor.constraint(equalTo: bottomAnchor)

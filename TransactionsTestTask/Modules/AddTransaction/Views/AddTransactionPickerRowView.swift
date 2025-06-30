@@ -9,6 +9,12 @@ import UIKit
 
 class SettingsPickerRowView: UIControl {
   
+  private struct Constants {
+    static let height: CGFloat = 44
+    static let horizontalPadding: CGFloat = 16
+    static let spacing: CGFloat = 8
+  }
+  
   private lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -53,14 +59,14 @@ class SettingsPickerRowView: UIControl {
     addSubview(titleLabel)
     addSubview(valueLabel)
     NSLayoutConstraint.activate([
-      heightAnchor.constraint(equalToConstant: 44),
+      heightAnchor.constraint(equalToConstant: Constants.height),
       
       titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.horizontalPadding),
       
       valueLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-      valueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-      valueLabel.leadingAnchor.constraint(greaterThanOrEqualTo: titleLabel.trailingAnchor, constant: 8),
+      valueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.horizontalPadding),
+      valueLabel.leadingAnchor.constraint(greaterThanOrEqualTo: titleLabel.trailingAnchor, constant: Constants.spacing)
     ])
   }
   

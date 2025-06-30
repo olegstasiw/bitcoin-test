@@ -25,7 +25,7 @@ final class AnalyticsServiceTests: XCTestCase {
   
   func testTrackEvent() {
     analyticsService.trackEvent(name: "Test Event", parameters: ["TestKey" : "TestValue"])
-      
+    
     let events = analyticsService.getTrackedEvents()
     XCTAssertEqual(events.count, 1)
     XCTAssertEqual(events.first?.name, "Test Event")

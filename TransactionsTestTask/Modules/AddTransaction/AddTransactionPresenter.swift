@@ -19,6 +19,9 @@ class AddTransactionPresenter: NSObject, AddTransactionViewToPresenter {
   var interactor: AddTransactionPresenterToInteractor?
   
   func addTransaction(amount: Double, category: TransactionCategory) {
+    guard amount > 0 else {
+      return
+    }
     let date = Date()
     let transaction = Transaction(amount: amount, type: .expense, category: category, date: date)
     interactor?.addTransaction(transaction: transaction)

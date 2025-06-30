@@ -9,6 +9,15 @@ import UIKit
 
 class AddTransactionViewController: UIViewController {
   
+  private struct Constants {
+    static let horizontalInset: CGFloat = 16
+    static let buttonHeight: CGFloat = 50
+    static let closeButtonSize: CGFloat = 44
+    static let closeButtonPadding: CGFloat = 16
+    static let spacing: CGFloat = 16
+    static let textFieldHeight: CGFloat = 50
+  }
+  
   private lazy var closeButton: UIButton = {
     let button = UIButton(type: .system)
     button.translatesAutoresizingMaskIntoConstraints = false
@@ -75,28 +84,28 @@ class AddTransactionViewController: UIViewController {
   
   private func setupConstraints() {
     NSLayoutConstraint.activate([
-      closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-      closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-      closeButton.widthAnchor.constraint(equalToConstant: 44),
-      closeButton.heightAnchor.constraint(equalToConstant: 44),
+      closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.closeButtonPadding),
+      closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.closeButtonPadding),
+      closeButton.widthAnchor.constraint(equalToConstant: Constants.closeButtonSize),
+      closeButton.heightAnchor.constraint(equalToConstant: Constants.closeButtonSize),
       
-      titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-      titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+      titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.horizontalInset),
+      titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.horizontalInset),
       titleLabel.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
       
-      addTransactionTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
-      addTransactionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-      addTransactionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-      addTransactionTextField.heightAnchor.constraint(equalToConstant: 50),
+      addTransactionTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.spacing),
+      addTransactionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.horizontalInset),
+      addTransactionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.horizontalInset),
+      addTransactionTextField.heightAnchor.constraint(equalToConstant: Constants.textFieldHeight),
       
-      categoryPicker.topAnchor.constraint(equalTo: addTransactionTextField.bottomAnchor, constant: 16),
-      categoryPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-      categoryPicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+      categoryPicker.topAnchor.constraint(equalTo: addTransactionTextField.bottomAnchor, constant: Constants.spacing),
+      categoryPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.horizontalInset),
+      categoryPicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.horizontalInset),
       
-      addButton.topAnchor.constraint(equalTo: categoryPicker.bottomAnchor, constant: 16),
-      addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-      addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-      addButton.heightAnchor.constraint(equalToConstant: 50)
+      addButton.topAnchor.constraint(equalTo: categoryPicker.bottomAnchor, constant: Constants.spacing),
+      addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.horizontalInset),
+      addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.horizontalInset),
+      addButton.heightAnchor.constraint(equalToConstant: Constants.buttonHeight),
     ])
   }
   
