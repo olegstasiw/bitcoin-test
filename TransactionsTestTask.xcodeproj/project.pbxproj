@@ -31,6 +31,14 @@
 		2142E5812E12A40E0071F6A4 /* MockCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2142E5802E12A40E0071F6A4 /* MockCoreDataManager.swift */; };
 		2142E5832E12A45E0071F6A4 /* MockAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2142E5822E12A45E0071F6A4 /* MockAnalyticsService.swift */; };
 		2142E5852E12A47C0071F6A4 /* MockUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2142E5842E12A47C0071F6A4 /* MockUserDefault.swift */; };
+		2142E5892E12A58F0071F6A4 /* WalletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2142E5882E12A58F0071F6A4 /* WalletTests.swift */; };
+		2142E58B2E12B4ED0071F6A4 /* AddTransactionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2142E58A2E12B4ED0071F6A4 /* AddTransactionsTests.swift */; };
+		2142E58D2E12B7F30071F6A4 /* AddTransactionsMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2142E58C2E12B7F30071F6A4 /* AddTransactionsMocks.swift */; };
+		2142E58F2E12B82C0071F6A4 /* WalletMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2142E58E2E12B82C0071F6A4 /* WalletMocks.swift */; };
+		2142E5912E12B8510071F6A4 /* MockBitcoinRateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2142E5902E12B8510071F6A4 /* MockBitcoinRateService.swift */; };
+		2142E5932E12B8B40071F6A4 /* MockTransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2142E5922E12B8B40071F6A4 /* MockTransactionService.swift */; };
+		2142E5952E12B9B50071F6A4 /* TopUpBalanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2142E5942E12B9B50071F6A4 /* TopUpBalanceTests.swift */; };
+		2142E5972E12BB6C0071F6A4 /* TopUpBalanceMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2142E5962E12BB6C0071F6A4 /* TopUpBalanceMocks.swift */; };
 		21E04A372E0F0C9D006475BC /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A362E0F0C9D006475BC /* WalletViewController.swift */; };
 		21E04A3A2E0F0CB6006475BC /* WalletPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A392E0F0CB6006475BC /* WalletPresenter.swift */; };
 		21E04A3C2E0F0CC5006475BC /* WalletInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E04A3B2E0F0CC5006475BC /* WalletInteractor.swift */; };
@@ -112,6 +120,14 @@
 		2142E5802E12A40E0071F6A4 /* MockCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataManager.swift; sourceTree = "<group>"; };
 		2142E5822E12A45E0071F6A4 /* MockAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAnalyticsService.swift; sourceTree = "<group>"; };
 		2142E5842E12A47C0071F6A4 /* MockUserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefault.swift; sourceTree = "<group>"; };
+		2142E5882E12A58F0071F6A4 /* WalletTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTests.swift; sourceTree = "<group>"; };
+		2142E58A2E12B4ED0071F6A4 /* AddTransactionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionsTests.swift; sourceTree = "<group>"; };
+		2142E58C2E12B7F30071F6A4 /* AddTransactionsMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionsMocks.swift; sourceTree = "<group>"; };
+		2142E58E2E12B82C0071F6A4 /* WalletMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMocks.swift; sourceTree = "<group>"; };
+		2142E5902E12B8510071F6A4 /* MockBitcoinRateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBitcoinRateService.swift; sourceTree = "<group>"; };
+		2142E5922E12B8B40071F6A4 /* MockTransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTransactionService.swift; sourceTree = "<group>"; };
+		2142E5942E12B9B50071F6A4 /* TopUpBalanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopUpBalanceTests.swift; sourceTree = "<group>"; };
+		2142E5962E12BB6C0071F6A4 /* TopUpBalanceMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopUpBalanceMocks.swift; sourceTree = "<group>"; };
 		21E04A362E0F0C9D006475BC /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		21E04A392E0F0CB6006475BC /* WalletPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPresenter.swift; sourceTree = "<group>"; };
 		21E04A3B2E0F0CC5006475BC /* WalletInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletInteractor.swift; sourceTree = "<group>"; };
@@ -243,6 +259,9 @@
 			children = (
 				2142E5872E12A4E60071F6A4 /* Services */,
 				2142E5862E12A4980071F6A4 /* MockData */,
+				2142E5982E12BBAB0071F6A4 /* Wallet */,
+				2142E5992E12BBB10071F6A4 /* AddTransactions */,
+				2142E59A2E12BBBD0071F6A4 /* TopUpBalance */,
 			);
 			path = TransactionsTestTaskTests;
 			sourceTree = "<group>";
@@ -250,11 +269,13 @@
 		2142E5862E12A4980071F6A4 /* MockData */ = {
 			isa = PBXGroup;
 			children = (
+				2142E5902E12B8510071F6A4 /* MockBitcoinRateService.swift */,
 				2142E5742E1286EF0071F6A4 /* MockBitcoinRateCacheManager.swift */,
 				2142E5762E12870E0071F6A4 /* MockURLProtocol.swift */,
 				2142E5802E12A40E0071F6A4 /* MockCoreDataManager.swift */,
 				2142E5822E12A45E0071F6A4 /* MockAnalyticsService.swift */,
 				2142E5842E12A47C0071F6A4 /* MockUserDefault.swift */,
+				2142E5922E12B8B40071F6A4 /* MockTransactionService.swift */,
 			);
 			path = MockData;
 			sourceTree = "<group>";
@@ -269,6 +290,33 @@
 				2142E57E2E1295DE0071F6A4 /* TransactionServiceTests.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		2142E5982E12BBAB0071F6A4 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				2142E5882E12A58F0071F6A4 /* WalletTests.swift */,
+				2142E58E2E12B82C0071F6A4 /* WalletMocks.swift */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		2142E5992E12BBB10071F6A4 /* AddTransactions */ = {
+			isa = PBXGroup;
+			children = (
+				2142E58A2E12B4ED0071F6A4 /* AddTransactionsTests.swift */,
+				2142E58C2E12B7F30071F6A4 /* AddTransactionsMocks.swift */,
+			);
+			path = AddTransactions;
+			sourceTree = "<group>";
+		};
+		2142E59A2E12BBBD0071F6A4 /* TopUpBalance */ = {
+			isa = PBXGroup;
+			children = (
+				2142E5942E12B9B50071F6A4 /* TopUpBalanceTests.swift */,
+				2142E5962E12BB6C0071F6A4 /* TopUpBalanceMocks.swift */,
+			);
+			path = TopUpBalance;
 			sourceTree = "<group>";
 		};
 		21E04A332E0F0BA4006475BC /* Application */ = {
@@ -574,14 +622,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				2142E5732E1268B90071F6A4 /* BitcoinRateServiceTests.swift in Sources */,
+				2142E5892E12A58F0071F6A4 /* WalletTests.swift in Sources */,
+				2142E58F2E12B82C0071F6A4 /* WalletMocks.swift in Sources */,
 				2142E57F2E1295DE0071F6A4 /* TransactionServiceTests.swift in Sources */,
 				2142E5832E12A45E0071F6A4 /* MockAnalyticsService.swift in Sources */,
 				2142E5752E1286EF0071F6A4 /* MockBitcoinRateCacheManager.swift in Sources */,
 				2142E57D2E12933D0071F6A4 /* AnalyticsServiceTests.swift in Sources */,
+				2142E5912E12B8510071F6A4 /* MockBitcoinRateService.swift in Sources */,
+				2142E5932E12B8B40071F6A4 /* MockTransactionService.swift in Sources */,
+				2142E5972E12BB6C0071F6A4 /* TopUpBalanceMocks.swift in Sources */,
 				2142E5812E12A40E0071F6A4 /* MockCoreDataManager.swift in Sources */,
 				2142E57B2E128D010071F6A4 /* RateListenerLoggerTests.swift in Sources */,
 				2142E5772E12870E0071F6A4 /* MockURLProtocol.swift in Sources */,
+				2142E58D2E12B7F30071F6A4 /* AddTransactionsMocks.swift in Sources */,
 				2142E5852E12A47C0071F6A4 /* MockUserDefault.swift in Sources */,
+				2142E5952E12B9B50071F6A4 /* TopUpBalanceTests.swift in Sources */,
+				2142E58B2E12B4ED0071F6A4 /* AddTransactionsTests.swift in Sources */,
 				2142E5792E128ACE0071F6A4 /* BitcoinRateCacheManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
