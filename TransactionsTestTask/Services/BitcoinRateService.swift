@@ -31,12 +31,14 @@ final class BitcoinRateServiceImpl {
     static let symbolQueryItemValue = "BTCUSDT"
   }
   
-  private let session = URLSession(configuration: .default)
+  private let session: URLSession
   var rateUpdatePublisher: PassthroughSubject<BitcoinRate, Never> = PassthroughSubject()
   var bitcoinRateCacheManager: BitcoinRateCacheManager
   
-  init(bitcoinRateCacheManager: BitcoinRateCacheManager) {
+  init(bitcoinRateCacheManager: BitcoinRateCacheManager,
+       session: URLSession = URLSession.shared) {
     self.bitcoinRateCacheManager = bitcoinRateCacheManager
+    self.session = session
   }
 }
 
