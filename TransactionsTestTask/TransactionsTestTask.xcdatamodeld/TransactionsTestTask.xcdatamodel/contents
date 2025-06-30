@@ -4,7 +4,6 @@
         <attribute name="amount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="transactionDescription" optional="YES" attributeType="String"/>
         <attribute name="type" attributeType="String"/>
     </entity>
 </model>

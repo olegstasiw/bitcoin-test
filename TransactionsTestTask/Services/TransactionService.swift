@@ -57,8 +57,7 @@ class TransactionServiceImpl: ObservableObject, TransactionService {
           amount: entity.amount,
           type: TransactionType(rawValue: entity.type ?? "expense") ?? .expense,
           category: entity.category.flatMap { TransactionCategory(rawValue: $0) },
-          date: entity.date ?? Date(),
-          description: entity.transactionDescription
+          date: entity.date ?? Date()
         )
       }
       
@@ -94,8 +93,7 @@ class TransactionServiceImpl: ObservableObject, TransactionService {
     createTransaction(amount: transaction.amount,
                       type: transaction.type,
                       category: transaction.category,
-                      date: transaction.date,
-                      description: transaction.description)
+                      date: transaction.date)
   }
   
   private func setupObservers() {
@@ -122,8 +120,7 @@ class TransactionServiceImpl: ObservableObject, TransactionService {
           amount: entity.amount,
           type: TransactionType(rawValue: entity.type ?? "expense") ?? .expense,
           category: entity.category.flatMap { TransactionCategory(rawValue: $0) },
-          date: entity.date ?? Date(),
-          description: entity.transactionDescription
+          date: entity.date ?? Date()
         )
       }
       
@@ -144,7 +141,7 @@ class TransactionServiceImpl: ObservableObject, TransactionService {
     loadInitialData()
   }
   
-  private func calculateBalance(from entities: [TransactionEntity]) -> Double {
+  func calculateBalance(from entities: [TransactionEntity]) -> Double {
     var balance: Double = 0.0
     
     for entity in entities {
@@ -159,7 +156,7 @@ class TransactionServiceImpl: ObservableObject, TransactionService {
     return balance
   }
   
-  private func groupTransactionsByDate(_ transactions: [Transaction]) -> [TransactionGroup] {
+  func groupTransactionsByDate(_ transactions: [Transaction]) -> [TransactionGroup] {
     let calendar = Calendar.current
     var groupedTransactions: [Date: [Transaction]] = [:]
     
@@ -183,14 +180,13 @@ class TransactionServiceImpl: ObservableObject, TransactionService {
 
 extension TransactionServiceImpl {
   
-  func createTransaction(amount: Double, type: TransactionType, category: TransactionCategory? = nil, date: Date = Date(), description: String? = nil) {
+  func createTransaction(amount: Double, type: TransactionType, category: TransactionCategory? = nil, date: Date = Date()) {
     let context = coreDataManager.context
     let transaction = TransactionEntity(context: context)
     transaction.amount = amount
     transaction.type = type.rawValue
     transaction.category = category?.rawValue
     transaction.date = date
-    transaction.transactionDescription = description
     
     coreDataManager.saveContext()
   }

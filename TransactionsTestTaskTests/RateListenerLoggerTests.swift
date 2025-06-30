@@ -9,20 +9,6 @@ import Foundation
 import XCTest
 @testable import TransactionsTestTask
 
-class MockAnalyticsService: AnalyticsService {
-  var trackEventCalledCount = 0
-  var calledTrackEventNames: String?
-  var calledTrackEventParameters: [String: String]?
-  
-  func trackEvent(name: String, parameters: [String : String]) {
-    self.calledTrackEventNames = name
-    self.calledTrackEventParameters = parameters
-    trackEventCalledCount += 1
-  }
-  
-  func getTrackedEvents() -> [AnalyticsEvent] { return [] }
-}
-
 class RateListenerLoggerTests: XCTestCase {
   
   var rateListenerLogger: RateListenerLogger!

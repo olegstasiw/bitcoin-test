@@ -9,24 +9,6 @@ import Foundation
 import XCTest
 @testable import TransactionsTestTask
 
-class MockUserDefault: UserDefaults {
-  var persistedData: Data? = nil
-  var persistenceKey: String? = nil
-  
-  override func set(_ value: Any?, forKey defaultName: String) {
-    persistedData = value as? Data
-    persistenceKey = defaultName
-  }
-  
-  override func data(forKey defaultName: String) -> Data? {
-    return persistedData
-  }
-  
-  override func removeObject(forKey defaultName: String) {
-    persistedData = nil
-  }
-}
-
 class BitcoinRateCacheManagerTests: XCTestCase {
   
   var cacheManager: BitcoinRateCacheManager!

@@ -20,7 +20,7 @@ class AddTransactionPresenter: NSObject, AddTransactionViewToPresenter {
   
   func addTransaction(amount: Double, category: TransactionCategory) {
     let date = Date()
-    let transaction = Transaction(amount: amount, type: .expense, category: category, date: date, description: nil)
+    let transaction = Transaction(amount: amount, type: .expense, category: category, date: date)
     interactor?.addTransaction(transaction: transaction)
   }
   

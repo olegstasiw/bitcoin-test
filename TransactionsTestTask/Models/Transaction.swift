@@ -13,13 +13,11 @@ struct Transaction: Identifiable {
   let type: TransactionType
   let category: TransactionCategory?
   let date: Date
-  let description: String?
   
-  init(amount: Double, type: TransactionType, category: TransactionCategory? = nil, date: Date = Date(), description: String? = nil) {
+  init(amount: Double, type: TransactionType, category: TransactionCategory? = nil, date: Date = Date()) {
     self.amount = amount
     self.type = type
     self.category = category
     self.date = date
-    self.description = description
   }
 }
